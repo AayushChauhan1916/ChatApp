@@ -2,6 +2,7 @@ const wrapAsync = require("./wrapAsync");
 const jwt = require("jsonwebtoken");
 const User = require("../model/user");
 
+
 const validateToken = async (token) => {
   try {
     if (!token) {
@@ -15,6 +16,7 @@ const validateToken = async (token) => {
     const user = await User.findById(decode.id).select("-password");
     return {
       success:true,
+      logout:false,
       user:user
     };
   } catch (err) {
