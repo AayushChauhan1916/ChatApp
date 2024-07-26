@@ -13,6 +13,14 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
+
+app.use(cors({
+  origin: 'https://chatapp-by-aayush-chauhan.onrender.com',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
+
+
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -23,12 +31,6 @@ const io = new Server(server, {
 }
 
 });
-
-app.use(cors({
-  origin: 'https://chatapp-by-aayush-chauhan.onrender.com',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
 
 const onlineUser = new Set();
 
