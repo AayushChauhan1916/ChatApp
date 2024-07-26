@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'https://chatapp-by-aayush-chauhan.onrender.com/',
+    origin: 'https://chatapp-by-aayush-chauhan.onrender.com',
     methods: ['GET', 'POST'],
     credentials: true,
     allowedHeaders: ['Content-Type', 'Authorization']
