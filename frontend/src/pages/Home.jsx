@@ -33,7 +33,7 @@ const Home = () => {
       );
 
       const api_Result = await response.json();
-      // console.log(api_Result);
+      console.log(api_Result);
 
       if (api_Result.data.logout == true) {
         toast.error("session expired,Please Login Again");
