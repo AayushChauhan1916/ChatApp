@@ -18,7 +18,8 @@ const io = new Server(server, {
   cors: {
     origin: 'https://chatapp-by-aayush-chauhan.onrender.com',
     methods: ['GET', 'POST'],
-    credentials: true
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization']
 }
 
 });
