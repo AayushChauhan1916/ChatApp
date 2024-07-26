@@ -8,6 +8,9 @@ const User = require("../model/user");
 const { Conversation, Message } = require("../model/conversation");
 const sideBarConversation = require("../utils/socketSidebar");
 const mongoose = require("mongoose");
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 
 const server = http.createServer(app);
 const io = new Server(server, {

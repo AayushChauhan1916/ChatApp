@@ -4,10 +4,11 @@ const databaseConnection = require("./utils/database");
 const userRouter = require("./routes/User");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
-require("dotenv").config();
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+  }
 
 const {app,server} = require("./socket/socket")
-
 
 const port = process.env.PORT || 8080;
 
