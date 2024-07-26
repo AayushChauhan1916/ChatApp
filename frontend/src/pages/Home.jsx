@@ -50,7 +50,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchUser();
-  }, [socketConnection]);
+  }, []);
 
   useEffect(() => {
     const socketConnection = io(import.meta.env.VITE_BACKEND_URL, {
