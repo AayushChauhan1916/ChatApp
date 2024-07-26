@@ -15,10 +15,18 @@ if (process.env.NODE_ENV !== 'production') {
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.FRONTEND_URL,
-    credentials: true, // Allow cookies and authorization headers
-  },
+    origin: 'https://chatapp-by-aayush-chauhan.onrender.com',
+    methods: ['GET', 'POST'],
+    credentials: true
+}
+
 });
+
+app.use(cors({
+  origin: 'https://chatapp-by-aayush-chauhan.onrender.com',
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+}));
 
 const onlineUser = new Set();
 
