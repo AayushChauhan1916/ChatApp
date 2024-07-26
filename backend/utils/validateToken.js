@@ -5,7 +5,7 @@ const User = require("../model/user");
 
 const validateToken = async (token) => {
   try {
-    if (!token) {
+    if (token==null) {
       return {
         success:false,
         message: "session out",
