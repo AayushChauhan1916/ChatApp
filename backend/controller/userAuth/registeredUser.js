@@ -1,6 +1,7 @@
 const wrapAsync = require("../../utils/wrapAsync");
 const User = require("../../model/user");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
+
 
 const registeredUser = wrapAsync(async (req,res)=>{
     const {name,email,password,profile} = req.body;

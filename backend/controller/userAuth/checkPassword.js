@@ -1,6 +1,6 @@
 const wrapAsync = require("../../utils/wrapAsync");
 const User = require("../../model/user");
-const bcrypt = require("bcrypt");
+const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
 
 const checkPassword = wrapAsync(async(req,res)=>{
