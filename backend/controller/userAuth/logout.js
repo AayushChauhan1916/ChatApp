@@ -8,6 +8,7 @@ const logOut = wrapAsync(async(req,res)=>{
 
     res.cookie("token","",cookieOption).status(200).json({
         success:true,
+        logout:true,
         message:"LogOut Successfully",
     })
 })
