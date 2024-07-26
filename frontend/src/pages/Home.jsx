@@ -17,7 +17,6 @@ import io from "socket.io-client";
 const Home = () => {
   const dispatch = useDispatch();
   const location = useLocation();
- 
 
   const basePath = location.pathname === "/";
 
@@ -38,9 +37,9 @@ const Home = () => {
 
       if (api_Result.data.logout == true) {
         toast.error("session expired,Please Login Again");
-        dispatch(logout());
         localStorage.clear();
-        console.log("No User");
+        dispatch(logout());
+        // console.log("No User");
       } else {
         dispatch(setUser(api_Result.data));
       }
@@ -51,12 +50,16 @@ const Home = () => {
 
   useEffect(() => {
     fetchUser();
-  }, []);
+  }, [socketConnection]);
 
   useEffect(() => {
     const socketConnection = io(import.meta.env.VITE_BACKEND_URL, {
       auth: {
         token: localStorage.getItem("token"),
+      },
+      withCredentials: true,
+      extraHeaders: {
+        "my-custom-header": "abcd",
       },
     });
 

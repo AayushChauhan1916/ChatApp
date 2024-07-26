@@ -22,7 +22,7 @@ const io = new Server(server, {
     origin: 'https://chatapp-by-aayush-chauhan.onrender.com',
     methods: ['GET', 'POST'],
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization']
+    allowedHeaders: ['Content-Type', 'Authorization','my-custom-header']
 }
 
 });
