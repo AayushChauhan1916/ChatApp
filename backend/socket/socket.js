@@ -14,11 +14,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
-app.use(cors({
-  origin: '*',
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true,
-}));
+
 
 
 const server = http.createServer(app);
