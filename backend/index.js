@@ -4,6 +4,7 @@ const databaseConnection = require("./utils/database");
 const userRouter = require("./routes/User");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const path = require("path");
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
   }
@@ -11,6 +12,7 @@ if (process.env.NODE_ENV !== 'production') {
 const {app,server} = require("./socket/socket")
 
 const port = process.env.PORT || 8080;
+
 
 databaseConnection().then(
     server.listen(port,()=>{
@@ -26,6 +28,7 @@ const corsOptions = {
   };
 
 // middleware
+app.use(express.static(path.resolve(__dirname, "dist")));
 app.use(express.json());
 app.use(cors(corsOptions));
 app.use(express.urlencoded({extended:true}));

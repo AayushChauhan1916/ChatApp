@@ -9,22 +9,17 @@ const { Conversation, Message } = require("../model/conversation");
 const sideBarConversation = require("../utils/socketSidebar");
 const mongoose = require("mongoose");
 const cors = require("cors");
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
 }
-
-
-
 
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: 'https://chatapp-by-aayush-chauhan.onrender.com',
-    methods: ['GET', 'POST'],
+    origin: process.env.FRONTEND_URL,
+    methods: ["GET", "POST"],
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization','my-custom-header']
-}
-
+  },
 });
 
 const onlineUser = new Set();
@@ -47,7 +42,7 @@ io.on("connection", async (socket) => {
       socket.join(user?._id.toString());
 
       // online User set
-      if (token!= null && user && !onlineUser.has(user._id)) {
+      if (token != null && user && !onlineUser.has(user._id)) {
         onlineUser.add(user._id);
       }
 
@@ -122,8 +117,8 @@ io.on("connection", async (socket) => {
           ).populate("message");
 
           // console.log(conversation)
-          io.to(data?.sender).emit("messages", conversation.message);
-          io.to(data?.receiver).emit("messages", conversation.message);
+          io.to(data?.sender).emit("messages", {conversation:conversation.message,message:message});
+          io.to(data?.receiver).emit("messages", {conversation:conversation.message,message:message});
 
           const sidebarConversationSender = await sideBarConversation(
             data?.sender
@@ -162,8 +157,8 @@ io.on("connection", async (socket) => {
             { new: true }
           ).populate("message");
 
-          io.to(data?.sender).emit("messages", conversation.message);
-          io.to(data?.receiver).emit("messages", conversation.message);
+          io.to(data?.sender).emit("messages", {conversation:conversation.message,message:message});
+          io.to(data?.receiver).emit("messages", {conversation:conversation.message,message:message});
 
           const sidebarConversationSender = await sideBarConversation(
             data?.sender

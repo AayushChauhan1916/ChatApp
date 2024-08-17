@@ -15,6 +15,8 @@ import backgroundimage from "../assets/wallapaper.jpeg";
 import { IoSendSharp } from "react-icons/io5";
 import moment from "moment";
 import toast from "react-hot-toast";
+import sendingSound2 from "../assets/sounds/sendingSound2.mp3";
+import sound from "../assets/sounds/sound.mp3";
 
 // import toast from "react-hot-toast";
 
@@ -44,7 +46,7 @@ const Message = () => {
   const userIdParams = params?.userId;
   const isValidUserId = /^[a-fA-F0-9]{24}$/.test(userIdParams);
 
-  if(!isValidUserId){
+  if (!isValidUserId) {
     navigate("/wrong");
   }
 
@@ -167,7 +169,14 @@ const Message = () => {
       });
 
       socketConnection.on("messages", (data) => {
-        setAllMessage(data);
+        if (data.message.sender === authUser._id) {
+          const sendingSound = new Audio(sendingSound2);
+          sendingSound.play();
+        } else {
+          const receivingSound = new Audio(sound);
+          receivingSound.play();
+        }
+        setAllMessage(data.conversation);
       });
     }
   };
