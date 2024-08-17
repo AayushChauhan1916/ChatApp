@@ -9,6 +9,8 @@ const { Conversation, Message } = require("../model/conversation");
 const sideBarConversation = require("../utils/socketSidebar");
 const mongoose = require("mongoose");
 const cors = require("cors");
+
+
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }

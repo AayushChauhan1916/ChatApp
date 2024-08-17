@@ -49,7 +49,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    const socketConnection = io("/", {
+    const socketConnection = io("/api", {
       auth: {
         token: localStorage.getItem("token"),
       },
