@@ -18,7 +18,7 @@ const RegisterUser = () => {
 
   const onSubmit = async (data, e) => {
     e.preventDefault();
-    const toastLoading = toast.loading("loading...")
+    const toastLoading = toast.loading("loading...");
     try {
       let profileInfo;
       let imageInfo;
@@ -35,25 +35,21 @@ const RegisterUser = () => {
         profile: profileInfo,
       };
 
-
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}api/auth/register`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(registerData),
-        }
-      );
+      const response = await fetch(`/api/auth/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(registerData),
+      });
 
       const api_Result = await response.json();
-      if(api_Result.success == true){
-        toast.dismiss(toastLoading)
+      if (api_Result.success == true) {
+        toast.dismiss(toastLoading);
         toast.success("Register Successfully");
         navigate("/checkemail");
-      }else{
-        toast.dismiss(toastLoading)
+      } else {
+        toast.dismiss(toastLoading);
         toast.error(api_Result.message);
       }
       reset();

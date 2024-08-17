@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { setToken } from "../redux/authSlice";
 // import { PiUserCircleLight } from "react-icons/pi";
 
-
 const checkPassword = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,7 +16,7 @@ const checkPassword = () => {
     if (!location.state) {
       navigate("/checkemail");
     }
-  },[]);
+  }, []);
 
   let userInfo;
   if (location.state) {
@@ -25,7 +24,6 @@ const checkPassword = () => {
     // console.log(userInfo)
   }
 
-  
   const {
     register,
     handleSubmit,
@@ -35,31 +33,27 @@ const checkPassword = () => {
 
   const onSubmit = async (data, e) => {
     try {
-
       e.preventDefault();
 
       const userData = {
-        id:userInfo._id,
-        password: data.password
-      }
+        id: userInfo._id,
+        password: data.password,
+      };
 
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}api/auth/login`,
-        {
-          method: "POST",
-          body: JSON.stringify(userData),
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials:"include"
-        }
-      );
+      const response = await fetch(`/api/auth/login`, {
+        method: "POST",
+        body: JSON.stringify(userData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
 
       const api_Result = await response.json();
       if (api_Result.success) {
         // console.log(api_Result);
-        dispatch(setToken(api_Result.token))
-        localStorage.setItem("token",api_Result.token);
+        dispatch(setToken(api_Result.token));
+        localStorage.setItem("token", api_Result.token);
         toast.success(api_Result.message);
         navigate("/");
       } else {
@@ -85,7 +79,11 @@ const checkPassword = () => {
               width={70}
             ></Avatar>
           )}
-          {userInfo && <h2 className="font-semibold text-lg mt-1 text-slate-800">{userInfo.name}</h2>}
+          {userInfo && (
+            <h2 className="font-semibold text-lg mt-1 text-slate-800">
+              {userInfo.name}
+            </h2>
+          )}
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-2 mt-1">

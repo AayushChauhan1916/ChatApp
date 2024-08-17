@@ -6,7 +6,6 @@ import { PiUserCircleLight } from "react-icons/pi";
 
 const CheckEmail = () => {
   const navigate = useNavigate();
-  
 
   const {
     register,
@@ -19,22 +18,19 @@ const CheckEmail = () => {
     try {
       e.preventDefault();
 
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}api/auth/email`,
-        {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await fetch(`/api/auth/email`, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       const api_Result = await response.json();
       if (api_Result.success) {
         toast.success(api_Result.message);
-        navigate("/checkpassword",{
-          state:api_Result
+        navigate("/checkpassword", {
+          state: api_Result,
         });
       } else {
         toast.error(api_Result.message);
@@ -50,7 +46,7 @@ const CheckEmail = () => {
     <div className="my-3">
       <div className="bg-white p-4 max-w-sm w-full mx-auto">
         <div className="w-fit mx-auto mt-2 mb-3">
-        <PiUserCircleLight size={70} />
+          <PiUserCircleLight size={70} />
         </div>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="flex flex-col gap-2 mt-1">

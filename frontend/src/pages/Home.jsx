@@ -24,13 +24,10 @@ const Home = () => {
 
   const fetchUser = async () => {
     try {
-      const response = await fetch(
-        `${import.meta.env.VITE_BACKEND_URL}api/auth/fetchuser`,
-        {
-          method: "POST",
-          credentials: "include",
-        }
-      );
+      const response = await fetch(`/api/auth/fetchuser`, {
+        method: "POST",
+        credentials: "include",
+      });
 
       const api_Result = await response.json();
       // console.log(api_Result);

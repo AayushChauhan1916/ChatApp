@@ -7,18 +7,17 @@ import toast from "react-hot-toast";
 import { IoMdClose } from "react-icons/io";
 import { useSelector } from "react-redux";
 
-const SearchUser = ({onClose}) => {
+const SearchUser = ({ onClose }) => {
   const [searchUser, setSearchUser] = useState([]);
   const [loading, setloading] = useState(false);
   const [search, setSearch] = useState("");
-  const onlineUser = useSelector((state)=>state.user.onlineUser)
+  const onlineUser = useSelector((state) => state.user.onlineUser);
   // console.log(searchUser)
-
 
   const handleSearch = async () => {
     setloading(true);
     try {
-      const url = `${import.meta.env.VITE_BACKEND_URL}api/auth/searchuser`;
+      const url = `/api/auth/searchuser`;
 
       const response = await fetch(url, {
         method: "POST",
@@ -26,7 +25,7 @@ const SearchUser = ({onClose}) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({search}),
+        body: JSON.stringify({ search }),
       });
 
       const api_Result = await response.json();
@@ -34,17 +33,16 @@ const SearchUser = ({onClose}) => {
       if (api_Result.success == true) {
         // console.log(api_Result);
         setloading(false);
-        setSearchUser(api_Result.data)
+        setSearchUser(api_Result.data);
       }
     } catch (err) {
-     
       toast.error(err.message || err);
     }
   };
 
   useEffect(() => {
-    if(search){
-      handleSearch()
+    if (search) {
+      handleSearch();
     }
   }, [search]);
 
@@ -79,15 +77,19 @@ const SearchUser = ({onClose}) => {
           {searchUser.length != 0 &&
             !loading &&
             searchUser.map((user, index) => {
-              return <SearchUserCard key={user._id} user={user} onClose={onClose} />;
+              return (
+                <SearchUserCard key={user._id} user={user} onClose={onClose} />
+              );
             })}
         </div>
       </div>
-      <div className="absolute top-0 right-0 text-slate-700 hover:text-white px-2 py-1 text-2xl lg:text-4xl cursor-pointer " onClick={onClose}>
-        <IoMdClose/>
+      <div
+        className="absolute top-0 right-0 text-slate-700 hover:text-white px-2 py-1 text-2xl lg:text-4xl cursor-pointer "
+        onClick={onClose}
+      >
+        <IoMdClose />
       </div>
     </div>
-    
   );
 };
 
