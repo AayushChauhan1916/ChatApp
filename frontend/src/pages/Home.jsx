@@ -49,7 +49,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    const socketConnection = io(import.meta.env.VITE_BACKEND_URL, {
+    const socketConnection = io("/", {
       auth: {
         token: localStorage.getItem("token"),
       },
